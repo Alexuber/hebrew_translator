@@ -1,0 +1,134 @@
+.translator-container {
+  margin-left: auto;
+  margin-right: auto;
+  padding: 90px 15px;
+}
+
+@media screen and (max-width: 767px) {
+  .translator-container {
+    max-width: 480px;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .translator-container {
+    width: 1024px;
+  }
+}
+
+@media screen and (min-width: 1360px) {
+  .translator-container {
+    width: 1360px;
+  }
+}
+
+@media screen and (min-width: 1921px) {
+  .translator-container {
+    width: 1920px;
+  }
+}
+
+.translator-banner {
+  height: 100%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .translator-banner {
+    width: 500px;
+  }
+}
+
+.translator-title {
+  text-transform: uppercase;
+  text-align: center;
+}
+
+.translator-desc {
+  text-align: center;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .translator-desc {
+    width: 500px;
+  }
+}
+
+#translationForm {
+  max-width: 500px;
+  margin: 30px auto;
+}
+
+#inputText {
+  box-sizing: border-box;
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  resize: vertical;
+}
+
+@media screen and (min-width: 768px) {
+  #inputText {
+    width: 500px;
+  }
+}
+
+#languageSelect {
+  width: 100%;
+  padding: 10px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+  color: #333;
+  font-size: 16px;
+}
+
+.submit-translate-btn {
+  display: block;
+  width: 100%;
+  padding: 10px;
+  border: none;
+  border-radius: 5px;
+  background-color: #000000;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submit-translate-btn:hover {
+  background-color: rgb(63, 145, 197);
+}
+
+#translationResult {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+  #translationResult {
+    width: 500px;
+  }
+}
+
+.copy-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media screen and (min-width: 768px) {
+  .copy-wrapper {
+    width: 500px;
+  }
+}
+
+#copyButton {
+  float: right;
+}
