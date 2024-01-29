@@ -1,6 +1,5 @@
 require('dotenv').config();
 const apiKey = process.env.OPENAI_API_KEY;
-const ass = process.env.ass;
 
 const submitBtn = document.querySelector('.submit-translate-btn');
 const languageSelect = document.getElementById('languageSelect');
