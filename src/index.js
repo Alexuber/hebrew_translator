@@ -31,7 +31,8 @@ async function translate() {
       messages: [
         {
           role: 'system',
-          content: `Translate each word of this text into ${selectedLang} in the format: Word from user - Translation on ${selectedLang}. Do not use any regular text.`,
+          content: `Translate for each word of users text into ${selectedLang} in the format: Word from user - Translation on ${selectedLang}. Do not use any regular text. For example: users text: "My name", output: My - Моё
+          name - имя`,
         },
         {
           role: 'user',
