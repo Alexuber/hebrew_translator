@@ -30,7 +30,7 @@ async function translate() {
         Authorization: `Bearer ${apiKey}`,
       },
       body: JSON.stringify({
-        model: 'gpt-3.5-turbo',
+        model: 'gpt-3.5-turbo-16k',
         messages: [
           {
             role: 'system',
@@ -43,7 +43,7 @@ async function translate() {
           },
         ],
         temperature: 0.8,
-        max_tokens: 2900,
+        max_tokens: 6000,
         top_p: 1,
       }),
     });
