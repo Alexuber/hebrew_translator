@@ -6,7 +6,6 @@ const languageSelect = document.getElementById('languageSelect');
 const inputText = document.getElementById('inputText');
 const translationResult = document.getElementById('translationResult');
 let selectedLang = languageSelect.value;
-
 submitBtn.addEventListener('click', translate);
 
 languageSelect.addEventListener('change', function () {
@@ -15,44 +14,58 @@ languageSelect.addEventListener('change', function () {
 });
 
 async function translate() {
+  const loading = document.querySelector('.loading');
+
+  submitBtn.innerText = 'Loading';
   submitBtn.disabled = true;
+  loading.classList.add('visible');
   translationResult.innerText = '';
   hideCopyButton();
 
-  const response = await fetch('https://api.openai.com/v1/chat/completions', {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      Authorization: `Bearer ${apiKey}`,
-    },
+  try {
+    const response = await fetch('https://api.openai.com/v1/chat/completions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+      },
+      body: JSON.stringify({
+        model: 'gpt-3.5-turbo',
+        messages: [
+          {
+            role: 'system',
+            content: `Translate for each word of users text into ${selectedLang} in the format: Word from user - Translation on ${selectedLang}. Do not use any regular text. For example: users text: "My name", output: My - Моё
+                name - имя`,
+          },
+          {
+            role: 'user',
+            content: inputText.value,
+          },
+        ],
+        temperature: 0.8,
+        max_tokens: 2900,
+        top_p: 1,
+      }),
+    });
 
-    body: JSON.stringify({
-      model: 'gpt-3.5-turbo',
-      messages: [
-        {
-          role: 'system',
-          content: `Translate for each word of users text into ${selectedLang} in the format: Word from user - Translation on ${selectedLang}. Do not use any regular text. For example: users text: "My name", output: My - Моё
-          name - имя`,
-        },
-        {
-          role: 'user',
-          content: inputText.value,
-        },
-      ],
-      temperature: 0.8,
-      max_tokens: 2900,
-      top_p: 1,
-    }),
-  });
+    if (!response.ok) {
+      const errorData = await response.json(); // Получаем данные об ошибке из JSON-тела ответа
+      throw new Error(errorData.error.message || 'Request failed'); // Выбрасываем новый объект ошибки с сообщением из JSON или стандартным сообщением
+    }
 
-  const translation = await response.json();
-
-  translationResult.innerText = translation.choices[0].message.content;
+    const translation = await response.json();
+    translationResult.innerText = translation.choices[0].message.content;
+  } catch (error) {
+    translationResult.innerText = error.message || 'An error occurred'; // Если нет сообщения об ошибке, выводим стандартное сообщение
+  }
 
   inputText.value = '';
   submitBtn.disabled = false;
   showCopyButton();
+  loading.classList.remove('visible');
+  submitBtn.innerText = 'Translate';
 }
+
 const copyButton = document.getElementById('copyButton');
 
 document.getElementById('copyButton').addEventListener('click', function () {
